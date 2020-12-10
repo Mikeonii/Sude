@@ -10,7 +10,6 @@
           max-width="500"
         ></v-text-field
       ></v-col>
-      <!-- another fucking changes -->
       <v-data-table
         v-model="selected"
         :headers="headers"

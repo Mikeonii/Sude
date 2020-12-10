@@ -29,9 +29,6 @@
           @change="check_reshift()"
         />
       </v-col>
-      <!-- <v-col cols="2">
-        <v-btn @click="">Reshift</v-btn>
-      </v-col> -->
       <v-spacer></v-spacer>
       <v-col cols="5">
         <v-text-field
@@ -151,9 +148,6 @@ export default {
     ...mapActions({
       update_client: "client/update_client",
     }),
-    // handleClick(item) {
-    //   console.log(item.name);
-    // },
     reshift(item) {
       const request = {
         client_id: item.id,

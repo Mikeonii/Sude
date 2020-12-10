@@ -12,7 +12,7 @@
         ></v-text-field
       ></v-col>
     </v-row>
-    <!-- some some changes -->
+
     <v-data-table
       v-model="selected"
       :headers="headers"
