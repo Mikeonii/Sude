@@ -48,6 +48,7 @@
         >
       </v-card-actions>
     </v-card>
+    <!-- some comments -->
   </v-dialog>
 </template>
 
