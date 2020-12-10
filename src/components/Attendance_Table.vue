@@ -12,7 +12,7 @@
         ></v-text-field
       ></v-col>
     </v-row>
-
+    <!-- some some changes -->
     <v-data-table
       v-model="selected"
       :headers="headers"
@@ -43,18 +43,18 @@ export default {
         { text: "ID", value: "id" },
         { text: "Account Number", value: "client_id" },
         { text: "Name", value: "name" },
-        { text: "Date/Time", value: "date_time" }
+        { text: "Date/Time", value: "date_time" },
       ],
-      items: []
+      items: [],
     };
   },
   computed: {
     ...mapGetters({
-      attendance: "attendance/attendance"
-    })
+      attendance: "attendance/attendance",
+    }),
   },
   created() {
     this.items = this.attendance.data;
-  }
+  },
 };
 </script>
