@@ -17,3 +17,4 @@ Technologies used are:
  5. The user can also Insert holiday and insert it in the holiday's table. This serves as basis on the counting of total Holiday time the employee worked.
  6. After all the process the user made, he/she can now calculate the summary and view it in the browser or through excel. 
  
+ Note: The app doesnt have authentication because only 1 user is required for the operation of the app and the client requested so. But i could integrate authentication with JWT token for security purposes. 
