@@ -12,7 +12,7 @@
               <p>Shift-out: {{ client[0][0].shift_out }}</p></v-col
             >
           </v-row>
-          <!-- some changes -->
+
           <v-row>
             <v-col>
               <table class="table">
