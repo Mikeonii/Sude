@@ -1,4 +1,4 @@
-# sudecor Daily Time Record System
+# SUDECOR Daily Time Record System
 
 Technologies used are: 
  1. Vue.JS 
