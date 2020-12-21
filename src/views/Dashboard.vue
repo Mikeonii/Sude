@@ -9,7 +9,9 @@
           <Database_Summary v-if="ready" class="mr-11" />
         </v-col>
       </v-row>
-      <Clients_Table v-if="ready" />
+      <v-row>
+        <v-col cols="7"><Clients_Table v-if="ready" max-width="300"/></v-col>
+      </v-row>
 
       <v-dialog v-model="dialog" width="300">
         <v-card>
@@ -62,7 +64,6 @@ export default {
   },
 
   created() {
-   
     this.get_attendance();
 
     this.get_clients().then(() => {

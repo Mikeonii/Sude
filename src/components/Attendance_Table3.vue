@@ -89,6 +89,7 @@ export default {
     };
     this.client.forEach(function(val, index) {
       val.forEach(function(val, index) {
+        // attendance summary
         if (val.half == "1") {
           first_half_total.regular_time = val.regular_time;
           first_half_total.holiday = val.holiday;
@@ -100,7 +101,9 @@ export default {
           second_half_total.sunday = val.sunday;
           second_half_total.over_time = val.over_time;
         }
+        // attendance rows
         if (val.is_morning == "1") {
+          // if empty
           if (val.is_morning == null) {
             // continue;
           } else {

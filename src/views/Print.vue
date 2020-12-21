@@ -70,7 +70,7 @@ export default {
     search() {
       this.loading = true;
       const month = this.months.indexOf(this.month) + 1;
-      var date = { date: this.year + "-" + month, half: this.half };
+      var date = { date: this.year + "-" + month };
       this.get_client_full(date).then((response) => {
         this.clients_list = response.data;
         console.log(this.clients_list);

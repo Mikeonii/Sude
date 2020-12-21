@@ -40,6 +40,7 @@ export default {
         },
 
         async client_full({ }, request) {
+
             let response = await axios.post('/client_full_info', request)
             return response
         },

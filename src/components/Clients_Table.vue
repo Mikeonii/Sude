@@ -51,6 +51,12 @@
       multi-sort
       :search="search"
     >
+      <template v-slot:[`item.actions0`]="{ item }">
+        <v-chip class="ma-2" color="green" outlined @click="straight(item)">
+          <span v-if="item.is_straight == '0'">Not Straight</span>
+          <span v-else>Straight</span>
+        </v-chip>
+      </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-chip
           :disabled="ready_shift"
@@ -83,10 +89,12 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import axios from "axios";
 export default {
   name: "Clients_Table",
   data() {
     return {
+      is_straight: "0",
       edit_index: -1,
       edit_item: [],
       ready_shift: true,
@@ -95,6 +103,7 @@ export default {
       selected: [],
       search: "",
       headers: [
+        { text: "", value: "actions0" },
         { text: "", value: "actions" },
         { text: "", value: "actions2" },
         { text: "", value: "actions3" },
@@ -102,26 +111,6 @@ export default {
         { text: "Name", value: "name" },
         { text: "Shift-in Time", value: "shift_in" },
         { text: "Shift-out Time:", value: "shift_out" },
-        {
-          text: "Total Regular-Time/hr.",
-          value: ".regular_time",
-        },
-        {
-          text: "Total Over-Time/hr.",
-          value: "over_time",
-        },
-        {
-          text: "Total Sunday/hr.",
-          value: "sunday",
-        },
-        {
-          text: "Total Holiday/hr.",
-          value: "holiday",
-        },
-        {
-          text: "year-month",
-          value: "year_and_month",
-        },
       ],
       items: null,
       hours: [],
@@ -141,6 +130,17 @@ export default {
     }
   },
   methods: {
+    async straight(item) {
+      const form = {
+        client_id: item.id,
+        is_straight: !item.is_straight,
+        shift_in: item.shift_in,
+        shift_out: item.shift_out,
+      };
+      let response = await axios.put("/client", form);
+      const index = this.items.indexOf(item);
+      this.items[index].is_straight = response.data;
+    },
     view_profile(item) {
       this.$router.push("/profile/" + item.id);
     },
