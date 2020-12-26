@@ -43,15 +43,6 @@
             >
           </v-list-item-content>
         </v-list-item>
-
-        <!-- <v-list-item>
-          <v-list-item-content class="white--text">
-            <v-btn small color="success lighten-4 black--text">
-              <v-icon class="mr-2">mdi-file-excel</v-icon>Export to Excel</v-btn
-            >
-          </v-list-item-content>
-        </v-list-item> -->
-
         <v-list-item>
           <v-list-item-content>
             <Calculate_Summary />
@@ -60,18 +51,8 @@
         <v-list-item>
           <v-list-item-content class="white--text">
             <Insert_Holiday v-if="ready" />
-            <!-- <v-btn small color="danger">
-              <v-icon class="mr-2">mdi-pencil</v-icon>Insert Holiday</v-btn
-            > -->
           </v-list-item-content>
         </v-list-item>
-        <!-- <v-list-item>
-          <v-list-item-content>
-            <v-btn small dark color="error" @click="export_attendance">
-              <v-icon class="mr-2">mdi-file-excel</v-icon>Export to PDF
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item> -->
         <p class="container white--text caption mt-14">
           <v-icon>mdi-alert-circle</v-icon>
           Note: You can always delete the current attendance rows after printing
