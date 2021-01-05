@@ -71,10 +71,10 @@ export default {
 
   computed: {},
   methods: {},
-  created() {
-    console.log(this.client);
+  beforeMount() {
     var morning = [];
     var afternoon = [];
+    // for summary
     var first_half_total = {
       regular_time: null,
       holiday: null,
@@ -87,42 +87,46 @@ export default {
       sunday: null,
       over_time: null,
     };
-    this.client.forEach(function(val, index) {
-      val.forEach(function(val, index) {
-        // attendance summary
-        if (val.half == "1") {
-          first_half_total.regular_time = val.regular_time;
-          first_half_total.holiday = val.holiday;
-          first_half_total.sunday = val.sunday;
-          first_half_total.over_time = val.over_time;
-        } else if (val.half == "2") {
-          second_half_total.regular_time = val.regular_time;
-          second_half_total.holiday = val.holiday;
-          second_half_total.sunday = val.sunday;
-          second_half_total.over_time = val.over_time;
-        }
-        // attendance rows
-        if (val.is_morning == "1") {
-          // if empty
-          if (val.is_morning == null) {
-            // continue;
-          } else {
-            morning.push(val.date_time);
-          }
-        } else {
-          if (val.is_morning == null) {
-            // continue;
-          } else {
-            afternoon.push(val.date_time);
-          }
-        }
-      });
+    // // attendance summary
+    this.client[1].forEach(function(val, index) {
+      if (val.half == 1) {
+        first_half_total.regular_time = val.regular_time;
+        first_half_total.holiday = val.holiday;
+        first_half_total.sunday = val.sunday;
+        first_half_total.over_time = val.over_time;
+      } else {
+        second_half_total.regular_time = val.regular_time;
+        second_half_total.holiday = val.holiday;
+        second_half_total.sunday = val.sunday;
+        second_half_total.over_time = val.over_time;
+      }
     });
-    this.morning_array = morning;
-    this.afternoon_array = afternoon;
+
+    this.client[2].forEach(function(val, index) {
+      console.log(val);
+      if (val.is_morning == "1") {
+        // if empty
+        if (val.is_morning == null) {
+          // continue;
+        } else {
+          morning.push(val.date_time);
+        }
+      } else {
+        //
+        if (val.is_morning == null) {
+          // continue;
+        } else {
+          afternoon.push(val.date_time);
+        }
+      }
+    });
+    // push to data
     this.first_half_total = first_half_total;
     this.second_half_total = second_half_total;
-    console.log(this.first_half_total);
+    this.morning_array = morning;
+    this.afternoon_array = afternoon;
+    // console.log(this.morning_array);
   },
+  // attendances
 };
 </script>
