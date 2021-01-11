@@ -37,21 +37,27 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
-          <v-list-item-content class="white--text">
-            <v-btn small color="primary" route :to="link.route"
-              ><v-icon class="mr-2">mdi-book</v-icon>Attendance Summary</v-btn
-            >
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
           <v-list-item-content>
             <Calculate_Summary />
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
           <v-list-item-content class="white--text">
+            <v-btn small color="primary" route :to="link.route"
+              ><v-icon class="mr-2">mdi-book</v-icon>Attendance Summary</v-btn
+            >
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-content class="white--text">
             <Insert_Holiday v-if="ready" />
           </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-btn color="red white--text" small @click="reset()"
+            >Reset Database</v-btn
+          >
         </v-list-item>
         <p class="container white--text caption mt-14">
           <v-icon>mdi-alert-circle</v-icon>
@@ -67,6 +73,7 @@ import Delete_Double_Entry_Dialog from "./Delete_Double_Entry_Dialog.vue";
 import Insert_Holiday from "./Insert_Holiday.vue";
 import Calculate_Summary from "./Calculate_Summary.vue";
 import { mapActions, mapGetters } from "vuex";
+import axios from "axios";
 export default {
   name: "Nav",
   components: {
@@ -102,6 +109,16 @@ export default {
         this.create_clients_loading = false;
         window.location.reload();
       });
+    },
+    async reset() {
+      var x = confirm("Are you sure you want to proceed?");
+      if (x == true) {
+        // axios delete
+        let reset = await axios.delete("/reset").then((data) => {
+          alert(data.data);
+          window.location.reload();
+        });
+      }
     },
   },
   created() {
