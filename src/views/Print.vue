@@ -11,8 +11,12 @@
       <v-col cols="1">
         <v-btn @click="search"> Search</v-btn>
       </v-col>
-      <v-col cols="2">
-        <v-btn color="error">Export to PDF</v-btn>
+      <v-col cols="2" v-if="this.month != null && this.year != null">
+        <v-btn small color="success" @click="excel_export()">
+          <v-icon class="pr-2">mdi-microsoft-excel</v-icon>
+
+          Export</v-btn
+        >
       </v-col>
     </v-row>
     <v-row v-if="loading">
@@ -76,6 +80,14 @@ export default {
         // console.log(this.clients_list);
         this.loading = false;
       });
+    },
+    excel_export() {
+      window.open(
+        "http://127.0.0.1:8000/print_summary/" +
+          (this.months.indexOf(this.month) + 1) +
+          "/" +
+          this.year
+      );
     },
   },
   created() {
