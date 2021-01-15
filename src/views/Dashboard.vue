@@ -10,7 +10,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="8"><Clients_Table v-if="ready" max-width="600"/></v-col>
+        <v-col cols="8"><Clients_Table v-if="ready" max-width="800"/></v-col>
       </v-row>
 
       <v-dialog v-model="dialog" width="300">
@@ -20,7 +20,7 @@
             <v-progress-linear
               color="lime"
               indeterminate
-              reverse
+              reversez
             ></v-progress-linear>
           </v-card-text>
         </v-card>

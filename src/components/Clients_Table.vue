@@ -3,33 +3,6 @@
     <h2 class="">Clients Table</h2>
 
     <v-row>
-      <v-col cols="1">
-        <p class="label">Reshift Schedule</p>
-      </v-col>
-      <v-col cols="2">
-        <v-select
-          v-model="shift_in"
-          append-icon="mdi-clock"
-          :items="hours"
-          name="from"
-          label="Log-in Time"
-          return-object
-          item-value="name"
-        />
-      </v-col>
-      <v-col cols="2">
-        <v-select
-          v-model="shift_out"
-          append-icon="mdi-clock"
-          :items="hours"
-          name="to"
-          label="Log-out Time"
-          return-object
-          item-value="name"
-          @change="check_reshift()"
-        />
-      </v-col>
-      <v-spacer></v-spacer>
       <v-col cols="5">
         <v-text-field
           v-model="search"
@@ -55,14 +28,10 @@
         </v-chip>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-chip
-          :disabled="ready_shift"
-          class="ma-2"
-          color="green"
-          outlined
-          @click="reshift(item)"
-        >
-          Reshift
+        <v-chip class="ma-2" color="green" outlined @click="reshift(item)">
+          <!-- {{ item.is_morning }} -->
+          <span v-if="item.is_morning_shift == '1'">Morning Shift</span>
+          <span v-else>Night Shift</span>
         </v-chip>
       </template>
       <template v-slot:[`item.actions2`]="{ item }">
@@ -94,9 +63,7 @@ export default {
       is_straight: "0",
       edit_index: -1,
       edit_item: [],
-      ready_shift: true,
-      shift_in: null,
-      shift_out: null,
+      is_morning_shift: null,
       selected: [],
       search: "",
       headers: [
@@ -106,8 +73,9 @@ export default {
         { text: "", value: "actions3" },
         { text: "Account Number", value: "id" },
         { text: "Name", value: "name" },
-        { text: "Shift-in Time", value: "shift_in" },
-        { text: "Shift-out Time:", value: "shift_out" },
+        // { text: "Is Morning Shift", value: "is_morning_shift" },
+        // { text: "Shift-in Time", value: "shift_in" },
+        // { text: "Shift-out Time:", value: "shift_out" },
       ],
       items: null,
       hours: [],
@@ -149,15 +117,17 @@ export default {
       update_client: "client/update_client",
     }),
     reshift(item) {
+      var is_morning_shift = !item.is_morning_shift;
       const request = {
         client_id: item.id,
-        shift_in: this.shift_in,
-        shift_out: this.shift_out,
+        is_morning_shift: is_morning_shift,
+        is_straight: item.is_straight,
       };
 
       this.update_client(request).then(() => {
         this.edit_index = this.items.indexOf(item);
-        (item.shift_in = this.shift_in), (item.shift_out = this.shift_out);
+        item.is_morning_shift = is_morning_shift;
+        // (item.shift_in = this.shift_in), (item.shift_out = this.shift_out);
         Object.assign(this.items[this.edit_index], item);
         alert("successfuly updated");
       });
